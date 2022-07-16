@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using LMS_Team5;
 using Microsoft.EntityFrameworkCore;
 using LMS_Team5.DataAccessLayer;
+using AutoMapper;
+using LMS_Team5.Repository;
 
 namespace LMS_Team5
 {
@@ -37,6 +39,10 @@ namespace LMS_Team5
 
             services.AddDbContextPool<DataAccessLayerDB>(Option => Option.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
 
+            services.AddAutoMapper(typeof(Startup));
+            services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            services.AddCors(option => option.AddDefaultPolicy(b => b.WithOrigins("*").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +56,8 @@ namespace LMS_Team5
             }
 
             app.UseRouting();
+            app.UseCors();
+            app.UseHttpsRedirection();
 
             app.UseAuthorization();
 

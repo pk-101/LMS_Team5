@@ -21,5 +21,7 @@ namespace LMS_Team5.DataAccessLayer
         public DbSet<LeaveDetailsDB> leaveDetails { get; set; }
         //This is Applied Leave Db
         public DbSet<AppliedLeaveDB> appliedLeaves { get; set; }
+        //This is LoginDB
+      //public DbSet<LoginDB> logins { get; set; }
     }
 }
