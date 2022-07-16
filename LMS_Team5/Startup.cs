@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LMS_Team5;
+using Microsoft.EntityFrameworkCore;
+using LMS_Team5.DataAccessLayer;
 
 namespace LMS_Team5
 {
@@ -31,6 +34,9 @@ namespace LMS_Team5
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "LMS_Team5", Version = "v1" });
             });
+
+            services.AddDbContextPool<DataAccessLayerDB>(Option => Option.UseSqlServer(Configuration.GetConnectionString("MyConnection")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

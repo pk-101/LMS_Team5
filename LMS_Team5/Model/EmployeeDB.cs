@@ -3,13 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LMS_Team5.Model
 {
-    public class Employee
+    public class EmployeeDB
     {
+        [Key]
         [Required]
         public int Emp_Id { get; set; }
+        [ForeignKey("ManagerDB")]
+        public virtual int Man_Id { get; set; }
+        public virtual ManagerDB ManagerDB { get; set; }
         [Required]
         public string Emp_Name { get; set; }
         [Required]
