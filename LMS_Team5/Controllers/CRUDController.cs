@@ -19,11 +19,21 @@ namespace LMS_Team5.Controllers
         {
             this.employeeRepo = employeeRepo;
         }
+        //This is to show all employees
         [HttpGet]
         [Route("DisplayAll")]
         public async Task<IActionResult> GetEmp()
         {
             var ar = await employeeRepo.GetEmployeesAsync();
+            return Ok(ar);
+        }
+
+        //With the help to this employees acn apply leave
+        [HttpPost]
+        [Route("Insert")]
+        public async Task<IActionResult> ApplyLeave(LeaveDetails leaveDetails)
+        {
+            var ar = await employeeRepo.InsertLeaveAsync(leaveDetails);
             return Ok(ar);
         }
     }

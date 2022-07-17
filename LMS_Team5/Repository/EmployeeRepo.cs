@@ -19,11 +19,22 @@ namespace LMS_Team5.Repository
             this.dataAccessLayerDB = dataAccessLayerDB;
             this.mapper = mapper;
         }
+        //This method is used to fetch all the employees and return in a list
         public async Task<List<Employee>> GetEmployeesAsync()
         {
             var empDetails = await dataAccessLayerDB.employees.ToListAsync();
             var data = mapper.Map<List<Employee>>(empDetails);
             return data;
+        }
+
+        //This method is used to apply leave , and insert it into leavedetails table
+        public async Task<int> InsertLeaveAsync(LeaveDetails leaveDetails)
+        {
+            var ar = mapper.Map<LeaveDetailsDB>(leaveDetails);
+            dataAccessLayerDB.leaveDetails.Add(ar);
+            await dataAccessLayerDB.SaveChangesAsync();
+            return 1;
+
         }
     }
 }

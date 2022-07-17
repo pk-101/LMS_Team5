@@ -9,6 +9,7 @@ namespace LMS_Team5.Repository
    public interface IEmployeeRepo
     {
         Task<List<Employee>> GetEmployeesAsync();
+        Task<LeaveDetails> InsertLeaveAsync(LeaveDetails leaveDetails);
 
     }
 }
