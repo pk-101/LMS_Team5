@@ -30,11 +30,48 @@ namespace LMS_Team5.Controllers
 
         //With the help to this employees acn apply leave
         [HttpPost]
-        [Route("Insert")]
+        [Route("InsertLeave")]
         public async Task<IActionResult> ApplyLeave(LeaveDetails leaveDetails)
         {
             var ar = await employeeRepo.InsertLeaveAsync(leaveDetails);
             return Ok(ar);
+        }
+
+
+        //With this we can search any employee with his/her emp_id
+        [HttpGet]
+        [Route("SearchById")]
+        public async Task<IActionResult> Search(int id)
+        {
+            var ar = await employeeRepo.GetEmpByIdAsync(id);
+            return Ok(ar);
+
+        }
+
+        //This is used to delete record from emp table
+        [HttpDelete]
+        [Route("DeleteEmp")]
+        public async Task<IActionResult> DeleteEmployee(int? id)
+        {
+            if (id != null)
+            {
+                await employeeRepo.DeleteEmpAsync(id);
+                return Ok();
+            }
+            return NotFound();
+        }
+
+        //This is to update emptable
+        [HttpPut]
+        [Route("UpdateEmp/{id?}")]
+        public async Task<IActionResult> UpdateEmployee(int? id, Employee employee)
+        {
+            if (id != null)
+            {
+                await employeeRepo.UpdateEmpAsync(id, employee);
+                return Ok();
+            }
+            return NotFound();
         }
     }
 }

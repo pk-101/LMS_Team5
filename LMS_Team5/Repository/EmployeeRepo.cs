@@ -36,5 +36,41 @@ namespace LMS_Team5.Repository
             return 1;
 
         }
+
+        //This method is used to search any employee with his/her emp_id from employee table
+        public async Task<Employee> GetEmpByIdAsync(int id)
+        {
+            var ar = await dataAccessLayerDB.employees.Where(x => x.Emp_Id == id).FirstOrDefaultAsync();
+            var w = mapper.Map<Employee>(ar);
+            return w;
+
+        }
+
+        public async Task DeleteEmpAsync(int? id)
+        {
+            var ar =  dataAccessLayerDB.employees.FirstOrDefault(x => x.Emp_Id == id);
+            if (ar != null)
+            {
+                dataAccessLayerDB.employees.Remove(ar);
+            }
+            await dataAccessLayerDB.SaveChangesAsync();
+        }
+
+        public async Task UpdateEmpAsync(int? id, Employee employee)
+        {
+
+            var ar = dataAccessLayerDB.employees.FirstOrDefault(x => x.Emp_Id == id);
+            if (ar != null)
+            {
+                ar.Emp_Name = employee.Emp_Name;
+                ar.Emp_Email = employee.Emp_Email;
+                ar.Emp_Dept = employee.Emp_Dept;
+                ar.Emp_Doj = employee.Emp_Doj;
+                ar.Emp_Phone = employee.Emp_Phone;
+                ar.Emp_LeaveBal = employee.Emp_LeaveBal;
+                await dataAccessLayerDB.SaveChangesAsync();
+            }
+           
+        }
     }
 }

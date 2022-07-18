@@ -9,7 +9,10 @@ namespace LMS_Team5.Repository
    public interface IEmployeeRepo
     {
         Task<List<Employee>> GetEmployeesAsync();
-        Task<LeaveDetails> InsertLeaveAsync(LeaveDetails leaveDetails);
+        Task<int> InsertLeaveAsync(LeaveDetails leaveDetails);
+        Task<Employee> GetEmpByIdAsync(int id);
+        Task DeleteEmpAsync(int? id);
+        Task UpdateEmpAsync(int? id, Employee employee);
 
     }
 }
