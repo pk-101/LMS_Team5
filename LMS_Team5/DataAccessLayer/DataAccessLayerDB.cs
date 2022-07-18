@@ -15,13 +15,13 @@ namespace LMS_Team5.DataAccessLayer
         }
         //This is Employee Table Db
         public DbSet<EmployeeDB> employees { get; set; }
-        //This is ManagerTable Db
+        //This is Manager Table Db
         public DbSet<ManagerDB> managers { get; set; }
         //This is Leave Details Db
         public DbSet<LeaveDetailsDB> leaveDetails { get; set; }
         //This is Applied Leave Db
         public DbSet<AppliedLeaveDB> appliedLeaves { get; set; }
         //This is LoginDB
-      //public DbSet<LoginDB> logins { get; set; }
+        //public DbSet<LoginDB> logins { get; set; }
     }
 }
