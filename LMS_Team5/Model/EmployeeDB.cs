@@ -12,9 +12,12 @@ namespace LMS_Team5.Model
         [Key]
         [Required]
         public int Emp_Id { get; set; }
-        //[ForeignKey("ManagerDB")]
-        //public virtual int Man_Id { get; set; }
-        //public virtual ManagerDB ManagerDB { get; set; }
+        [ForeignKey("ManagerDB")]
+        public virtual int Man_Id { get; set; }
+        public virtual ManagerDB ManagerDB { get; set; }
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
         [Required]
         public string Emp_Name { get; set; }
         [Required]

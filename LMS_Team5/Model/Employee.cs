@@ -15,6 +15,9 @@ namespace LMS_Team5.Model
         [Required]
         public string Emp_Email { get; set; }
         [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [Required]
         public long Emp_Phone { get; set; }
         [Required]
         [DataType(DataType.Date)]

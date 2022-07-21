@@ -83,7 +83,16 @@ namespace LMS_Team5.Migrations
                     b.Property<long>("Emp_Phone")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Man_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Emp_Id");
+
+                    b.HasIndex("Man_Id");
 
                     b.ToTable("employees");
                 });
@@ -154,6 +163,17 @@ namespace LMS_Team5.Migrations
                     b.HasKey("Man_Id");
 
                     b.ToTable("managers");
+                });
+
+            modelBuilder.Entity("LMS_Team5.Model.EmployeeDB", b =>
+                {
+                    b.HasOne("LMS_Team5.Model.ManagerDB", "ManagerDB")
+                        .WithMany()
+                        .HasForeignKey("Man_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ManagerDB");
                 });
 
             modelBuilder.Entity("LMS_Team5.Model.LeaveDetailsDB", b =>

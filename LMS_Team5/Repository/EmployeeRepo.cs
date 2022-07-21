@@ -72,5 +72,16 @@ namespace LMS_Team5.Repository
             }
            
         }
+
+        public async Task<int> LoginAsync(string Emp_email, string Password)
+        {
+            var data = await dataAccessLayerDB.employees.FirstOrDefaultAsync(x => x.Emp_Email == Emp_email & x.Password == Password);
+            if (data != null)
+            {
+                var ar = mapper.Map<Employee>(data);
+                return 1;
+            }
+            return 0;
+        }
     }
 }

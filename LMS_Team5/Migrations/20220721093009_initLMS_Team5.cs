@@ -27,24 +27,6 @@ namespace LMS_Team5.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "employees",
-                columns: table => new
-                {
-                    Emp_Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Emp_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Emp_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Emp_Phone = table.Column<long>(type: "bigint", nullable: false),
-                    Emp_Doj = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Emp_Dept = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Emp_LeaveBal = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_employees", x => x.Emp_Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "managers",
                 columns: table => new
                 {
@@ -57,6 +39,32 @@ namespace LMS_Team5.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_managers", x => x.Man_Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "employees",
+                columns: table => new
+                {
+                    Emp_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Man_Id = table.Column<int>(type: "int", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Emp_Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Emp_Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Emp_Phone = table.Column<long>(type: "bigint", nullable: false),
+                    Emp_Doj = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Emp_Dept = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Emp_LeaveBal = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_employees", x => x.Emp_Id);
+                    table.ForeignKey(
+                        name: "FK_employees_managers_Man_Id",
+                        column: x => x.Man_Id,
+                        principalTable: "managers",
+                        principalColumn: "Man_Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,6 +95,11 @@ namespace LMS_Team5.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_employees_Man_Id",
+                table: "employees",
+                column: "Man_Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_leaveDetails_Emp_Id",
                 table: "leaveDetails",
                 column: "Emp_Id");
@@ -101,10 +114,10 @@ namespace LMS_Team5.Migrations
                 name: "leaveDetails");
 
             migrationBuilder.DropTable(
-                name: "managers");
+                name: "employees");
 
             migrationBuilder.DropTable(
-                name: "employees");
+                name: "managers");
         }
     }
 }

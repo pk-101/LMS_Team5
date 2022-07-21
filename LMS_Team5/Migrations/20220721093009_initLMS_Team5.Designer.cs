@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LMS_Team5.Migrations
 {
     [DbContext(typeof(DataAccessLayerDB))]
-    [Migration("20220716081233_initLMS_Team5")]
+    [Migration("20220721093009_initLMS_Team5")]
     partial class initLMS_Team5
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -85,7 +85,16 @@ namespace LMS_Team5.Migrations
                     b.Property<long>("Emp_Phone")
                         .HasColumnType("bigint");
 
+                    b.Property<int>("Man_Id")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Emp_Id");
+
+                    b.HasIndex("Man_Id");
 
                     b.ToTable("employees");
                 });
@@ -156,6 +165,17 @@ namespace LMS_Team5.Migrations
                     b.HasKey("Man_Id");
 
                     b.ToTable("managers");
+                });
+
+            modelBuilder.Entity("LMS_Team5.Model.EmployeeDB", b =>
+                {
+                    b.HasOne("LMS_Team5.Model.ManagerDB", "ManagerDB")
+                        .WithMany()
+                        .HasForeignKey("Man_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ManagerDB");
                 });
 
             modelBuilder.Entity("LMS_Team5.Model.LeaveDetailsDB", b =>

@@ -55,8 +55,8 @@ namespace LMS_Team5
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LMS_Team5 v1"));
             }
 
-            app.UseRouting();
             app.UseCors();
+            app.UseRouting();
             app.UseHttpsRedirection();
 
             app.UseAuthorization();

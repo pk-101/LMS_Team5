@@ -73,5 +73,17 @@ namespace LMS_Team5.Controllers
             }
             return NotFound();
         }
+
+        //This is for signin
+        [HttpGet]
+        [Route("EmpLogin/{Emp_email}/{Password}")]
+        public async Task<int> Emp_Login(string Emp_email, string Password)
+        {
+            var lg = await employeeRepo.LoginAsync(Emp_email, Password);
+            if (lg == 0)
+                return 0;
+            else
+                return 1;
+        }
     }
 }

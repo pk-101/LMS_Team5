@@ -13,6 +13,7 @@ namespace LMS_Team5.Repository
         Task<Employee> GetEmpByIdAsync(int id);
         Task DeleteEmpAsync(int? id);
         Task UpdateEmpAsync(int? id, Employee employee);
+        Task<int> LoginAsync(string Emp_email, string Password);
 
     }
 }
